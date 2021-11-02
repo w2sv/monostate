@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 from monostate import __version__
 
 setup(
-    name='asciiplot',
+    name='monostate',
     packages=find_packages(exclude=(["*.tests", "*.tests.*", "tests.*", "tests"])),
     version=__version__,
     license='MIT',
