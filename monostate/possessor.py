@@ -8,17 +8,19 @@ class MonoStatePossessor(abc.ABC):
 
     __mono_state: Dict = {}
 
+    @classmethod
+    def __equate_with_mono_state(cls, instance):
+        instance.__dict__ = cls.__mono_state
+
     def __init__(self):
         """ Equate instance dict and global state """
 
-        self.__dict__ = self.__mono_state
+        self.__equate_with_mono_state(self)
 
     @classmethod
-    def get_instance(cls):
+    def instance(cls):
         # create empty instance of subclass
         instance = cls.__new__(cls)
-
-        # equate instance dict and global state
-        super(cls, instance).__init__()
+        cls.__equate_with_mono_state(instance)
 
         return instance
