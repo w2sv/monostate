@@ -1,5 +1,5 @@
 # __monostate__
-Lightweight python package providing singleton base class
+Lightweight python package free of any third-party dependencies, providing monostate base class through implementation of the borg pattern
 
 
 [![Python](https://img.shields.io/pypi/pyversions/tensorflow.svg?style=plastic)](https://badge.fury.io/py/tensorflow)
