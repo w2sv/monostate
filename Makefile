@@ -21,8 +21,8 @@ pytest:
 # --------------
 # Building
 # --------------
-build: test
-	rm -rf asciiplot.egg-info
+build:
+	rm -rf monostate.egg-info
 	rm -rf build
 	rm -rf dist
 

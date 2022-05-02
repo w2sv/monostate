@@ -15,5 +15,5 @@ coverage.xml
 
 # Build
 /build/
-/asciiplot.egg-info/
+*.egg-info
 /dist/
