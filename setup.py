@@ -13,5 +13,5 @@ setup(
     author='w2sv',
     author_email='zangenbergjanek@googlemail.com',
     platforms=['Linux', 'Windows', 'MacOS'],
-    description='Monostate class interface'
+    description='Dependency-free providing of monostate owner base class'
 )

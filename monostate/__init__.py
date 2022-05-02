@@ -1,2 +1,2 @@
 from monostate.version import __version__
-from monostate.possessor import MonoStatePossessor
+from monostate.owner import MonoStateOwner
