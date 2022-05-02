@@ -17,6 +17,7 @@ mypy:
 
 pytest:
 	coverage run -m pytest -vv tests/
+	coverage xml
 
 # --------------
 # Building
