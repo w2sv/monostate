@@ -1,5 +1,5 @@
 # __monostate__
-Lightweight python package free of any third-party dependencies, providing monostate base class through implementation of the borg pattern
+Dependency-free python package, providing monostate owner base class through implementation of the borg pattern
 
 
 [![Build](https://github.com/w2sv/monostate/actions/workflows/build.yaml/badge.svg)](https://github.com/w2sv/monostate/actions/workflows/build.yaml)
