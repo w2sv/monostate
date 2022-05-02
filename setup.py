@@ -9,8 +9,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='monostate',
-    package_dir={str(): 'monostate'},
-    packages=find_packages(where='monostate'),
+    packages=find_packages(exclude=(["tests"])),
     version=__version__,
     license='MIT',
     description='Dependency-free monostate owner base class',
