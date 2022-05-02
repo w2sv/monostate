@@ -21,16 +21,13 @@ pytest:
 # --------------
 # Building
 # --------------
-build:
+wheel:
 	rm -rf monostate.egg-info
 	rm -rf build
 	rm -rf dist
 
 	python setup.py sdist bdist_wheel --dist-dir ./dist
 
-upload: build
+upload: wheel
 	python -m twine check dist/*
 	python setup.py sdist bdist_wheel upload
-
-	# Adding release tag to push:
-	# git tag -a v0.1.1 -m "Alter short pypi description"
