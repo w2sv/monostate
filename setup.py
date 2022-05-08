@@ -15,7 +15,7 @@ setup(
     description='Dependency-free monostate owner base class',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    keywords=['singleton', 'borg', 'design-patterns'],
+    keywords='singleton, borg, design-patterns',
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
