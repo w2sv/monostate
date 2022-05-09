@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "monostate"
+version = "0.0.4"
+description = "Dependency-free monostate owner base class"
+authors = ["w2sv <zangenbergjanek@googlemail.com>"]
+license = "MIT"
+repository = "https://github.com/w2sv/monostate"
+keywords=['singleton', 'borg', 'design-patterns', 'anti-patterns']
+classifiers = [
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+
+[tool.poetry.dev-dependencies]
+twine = "*"
+mypy = "*"
+pytest = "*"
+coverage = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
