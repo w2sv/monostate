@@ -1,16 +1,19 @@
 SHELL=/bin/bash
 
-test: mypy pytest coverage-report  # run with -k flag in order to continue in case of recipe failure
-
 ###########
 # Testing #
 ###########
+
+test: mypy pytest doctest coverage-report  # run with -k flag in order to continue in case of recipe failure
 
 mypy:
 	mypy monostate/
 
 pytest:
 	coverage run -m pytest -vv tests/
+
+doctest:
+	python -m pytest -vv --doctest-modules --doctest-continue-on-failure ./monostate/
 
 coverage-report:
 	coverage xml
