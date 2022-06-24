@@ -1,1 +1,1 @@
-from monostate.owner import MonoStateOwner
+from monostate.monostate import MonoState

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "monostate"
-version = "0.0.7"
+version = "0.0.8"
 description = "Dependency-free monostate owner base class"
 authors = ["w2sv <zangenbergjanek@googlemail.com>"]
 license = "MIT"

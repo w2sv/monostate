@@ -1,8 +1,12 @@
 import abc
-from typing import Dict
+from typing import Dict, Callable, TypeVar, Any, cast
+from functools import wraps
 
 
-class MonoStateOwner(abc.ABC):
+FuncT = TypeVar("FuncT", bound=Callable[..., Any])
+
+
+class MonoState(abc.ABC):
     """ Base class for classes which are to own one singular global state, implemented
         by means of the Borg-pattern """
 
@@ -26,3 +30,13 @@ class MonoStateOwner(abc.ABC):
     def __mono_state_equated(cls, instance):
         instance.__dict__ = cls.__mono_states[cls.__name__]
         return instance
+
+    @classmethod
+    def receiver(cls, f: FuncT) -> FuncT:
+        """ Function decorator, passing subtype instance as trailing kwarg
+            'mono_state_instance' to f """
+        
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            return f(*args, **kwargs, mono_state_instance=cls.instance())
+        return cast(FuncT, wrapper)
