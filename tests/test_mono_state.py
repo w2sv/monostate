@@ -9,7 +9,7 @@ _INITIAL_B = 1
 
 class MonoStateImplementation(MonoState):
     def __init__(self, a=_INITIAL_A, b=_INITIAL_B):
-        super().__init__()
+        super().__init__(instance_kwarg_name='implementation_instance')
 
         self.a = a
         self.b = b
@@ -68,11 +68,11 @@ def test_independence_of_different_monostate_owner_implementations(instance):
     OtherMonoStateImplementation(9)
 
     other_instance = OtherMonoStateImplementation.instance()
-    assert other_instance.__dict__ == {'c': 9}
+    assert other_instance.__dict__ == {'c': 9, '_MonoState__instance_kwarg_name': 'monostate_instance'}
 
     assert instance.a == _INITIAL_A
     assert instance.b == _INITIAL_B
-    assert instance.__dict__ == {'a': _INITIAL_A, 'b': _INITIAL_B}
+    assert instance.__dict__ == {'a': _INITIAL_A, 'b': _INITIAL_B, '_MonoState__instance_kwarg_name': 'implementation_instance'}
 
     instance.d = None
     assert hasattr(instance, 'd')
@@ -80,9 +80,15 @@ def test_independence_of_different_monostate_owner_implementations(instance):
 
 
 def test_receiver():
+    @MonoStateImplementation.receiver
+    def some_func(a, b, implementation_instance):
+        assert isinstance(implementation_instance, MonoStateImplementation)
+        
+    some_func(3, 4)
 
     @MonoStateImplementation.receiver
-    def someFunc(a, b, mono_state_instance):
-        assert isinstance(mono_state_instance, MonoStateImplementation)
-        
-    someFunc(3, 4)
+    def some_func(monostate_instance):
+        pass
+
+    with pytest.raises(TypeError):
+        some_func()

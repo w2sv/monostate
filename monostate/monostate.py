@@ -12,22 +12,24 @@ class MonoState(abc.ABC):
 
     __mono_states: Dict[str, Dict] = {}
 
-    def __init__(self):
+    def __init__(self, instance_kwarg_name='monostate_instance'):
         """ Equates instance dict with global state """
 
         self.__class__.__mono_states.setdefault(self.__class__.__name__, {})
-        self.__mono_state_equated(self)
+        self.__instance_and_mono_state_equated(self)
+
+        self.__instance_kwarg_name = instance_kwarg_name
 
     @classmethod
     def instance(cls):
         try:
-            return cls.__mono_state_equated(cls.__new__(cls))
+            return cls.__instance_and_mono_state_equated(cls.__new__(cls))
         except KeyError:
             raise AttributeError(f"{cls.__name__} respective mono state hasn't yet been initialized; "
                                  f"Call MonoStateOwner.__init__ before requesting instance")
 
     @classmethod
-    def __mono_state_equated(cls, instance):
+    def __instance_and_mono_state_equated(cls, instance):
         instance.__dict__ = cls.__mono_states[cls.__name__]
         return instance
 
@@ -38,5 +40,7 @@ class MonoState(abc.ABC):
         
         @wraps(f)
         def wrapper(*args, **kwargs):
-            return f(*args, **kwargs, mono_state_instance=cls.instance())
+            instance = cls.instance()
+            kwargs.update({instance.__instance_kwarg_name: instance})
+            return f(*args, **kwargs)
         return cast(FuncT, wrapper)
