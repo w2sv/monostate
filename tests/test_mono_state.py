@@ -26,6 +26,15 @@ def test_initialization(instance):
     assert instance.b == _INITIAL_B
 
 
+def test_is_initialized():
+    class SomeMono(MonoState):
+        pass
+
+    assert not SomeMono.is_initialized()
+    SomeMono()
+    assert SomeMono.is_initialized()
+
+
 def test_value_mirroring_across_instances(instance):
     A_VALUE, B_VALUE = 99, 111
 

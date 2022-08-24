@@ -21,12 +21,15 @@ class MonoState(abc.ABC):
         self.__instance_kwarg_name = instance_kwarg_name
 
     @classmethod
+    def is_initialized(cls) -> bool:
+        return cls.__name__ in cls.__mono_states
+
+    @classmethod
     def instance(cls):
         try:
             return cls.__instance_and_mono_state_equated(cls.__new__(cls))
         except KeyError:
-            raise AttributeError(f"{cls.__name__} respective mono state hasn't yet been initialized; "
-                                 f"Call MonoStateOwner.__init__ before requesting instance")
+            raise AttributeError(f"{cls.__name__} mono state not yet initialized")
 
     @classmethod
     def __instance_and_mono_state_equated(cls, instance):
